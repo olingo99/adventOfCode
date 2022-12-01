@@ -26,13 +26,18 @@ fn main() {
                     id+=1;
                 }
                 else{
-                    calories[id].push(ip);
+                    calories[id].push(ip.parse::<u32>().unwrap());
                 }
             }
         }
     }
 
-    
+    //let mut res: Vec<u32> = Vec::new();
+    let mut res:u32 = 0;
+    for elf in calories{
+        res = elf.iter().sum();
+    }   
+    dbg!(res);
     
 
 }
