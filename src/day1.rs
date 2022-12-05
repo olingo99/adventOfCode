@@ -2,8 +2,9 @@
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
-use std::collections::HashMap;
-use std::time::{Duration, Instant};
+
+use crate::input;
+
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
 where P: AsRef<Path>, {
@@ -11,16 +12,14 @@ where P: AsRef<Path>, {
     Ok(io::BufReader::new(file).lines())
 }
 
-
-fn main() {
-    let start = Instant::now();
+pub fn day1() -> input::Result<()>{
     let mut calories = Vec::new();
     calories.push(Vec::new());
 
     let mut res = Vec::new();
 
     let mut id = 0;
-    if let Ok(lines) = read_lines("../data/CalorieCounting.txt") {
+    if let Ok(lines) = read_lines("../data/day1.txt") {
         for line in lines {
             if let Ok(ip) = line {
 
@@ -39,10 +38,9 @@ fn main() {
 
     res.sort();
 
-    let duration = start.elapsed();
     let l = res.len();
-    println!("Time elapsed in expensive_function() is: {:?}", duration);
     dbg!(res[l-1]+res[l-2]+res[l-3]);
-    
-
+    Ok(())
 }
+
+    

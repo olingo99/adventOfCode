@@ -1,14 +1,10 @@
-// use std::fs::File;
-// use std::io::{self, BufRead};
-// use std::path::Path;
-use std::collections::HashMap;
-use std::time::{Duration, Instant};
-
-
 use std::io::{BufRead, BufReader};
 use std::fs::File;
-fn main(){
-    let start = Instant::now();
+
+use crate::input;
+
+
+pub fn day3() -> input::Result<()> {
     let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let mut score = 0;
 
@@ -17,7 +13,7 @@ fn main(){
 
 
 
-    let reader = BufReader::new(File::open("../data/rucksack.txt").expect("Cannot open file.txt"));
+    let reader = BufReader::new(File::open("../data/day3.txt").expect("Cannot open file.txt"));
 
 
 
@@ -42,12 +38,11 @@ fn main(){
     }
 
     dbg!(score);
-    let duration = start.elapsed();
-    println!("Time elapsed in expensive_function() is: {:?}", duration);
+
+    Ok(())
 }
 
 fn exo1(){
-    let start = Instant::now();
     let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let mut score = 0;
 
@@ -71,6 +66,4 @@ fn exo1(){
     }
 
     dbg!(score);
-    let duration = start.elapsed();
-    println!("Time elapsed in expensive_function() is: {:?}", duration);
 }

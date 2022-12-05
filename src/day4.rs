@@ -1,11 +1,10 @@
-use std::collections::HashMap;
-use std::time::{Duration, Instant};
+
 use std::io::{BufRead, BufReader};
 use std::fs::File;
 
+use crate::input;
 
-fn main(){
-    let start = Instant::now();
+pub fn day4() -> input::Result<()> {
     let mut score = 0;
     let reader = BufReader::new(File::open("../data/day4.txt").expect("Cannot open file.txt"));
 
@@ -28,12 +27,11 @@ fn main(){
 
 
     dbg!(score);
-    let duration = start.elapsed();
-    println!("Time elapsed in expensive_function() is: {:?}", duration);
+    Ok(())
 }
 
+
 fn exo1(){
-    let start = Instant::now();
     let mut score = 0;
     let reader = BufReader::new(File::open("../data/day4.txt").expect("Cannot open file.txt"));
 
@@ -53,6 +51,4 @@ fn exo1(){
 
 
     dbg!(score);
-    let duration = start.elapsed();
-    println!("Time elapsed in expensive_function() is: {:?}", duration);
 }

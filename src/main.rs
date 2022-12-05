@@ -1,58 +1,42 @@
-use std::collections::HashMap;
-use std::time::{Duration, Instant};
-use std::io::{BufRead, BufReader};
-use std::fs::File;
+// mod day1;
+// mod day2;
+// mod day3;
+// mod day4;
+mod day5;
 
+mod input;
 
-fn main(){
-    let start = Instant::now();
-    let mut score = 0;
-    let reader = BufReader::new(File::open("../data/day5.txt").expect("Cannot open file.txt"));
+use input::Day;
 
-
-
-    for line in reader.lines(){  
-        let line = line.unwrap();
-        let data = line.split(",").collect::<Vec<&str>>();
-        let elf1 = data[0].split("-").map(|x| x.parse::<u16>().unwrap()).collect::<Vec<u16>>();
-        let elf2 = data[1].split("-").map(|x| x.parse::<u16>().unwrap()).collect::<Vec<u16>>();
-
-        let elf1range = elf1[0]..elf1[1]+1;
-        let elf2range = elf2[0]..elf2[1]+1;
-
-        if elf1range.contains(&elf2[0]) || elf2range.contains(&elf1[0]) || elf1range.contains(&elf2[1]) || elf2range.contains(&elf1[1]) {
-            score += 1;
-        }
-
+fn main() {
+    let days = vec![
+        // Day::new("Day 1", day1::day1),
+        // Day::new("Day 2", day2::day2),
+        // Day::new("Day 3", day3::day3),
+        // Day::new("Day 4", day4::day4),
+        Day::new("Day 5", day5::day5),
+        // Day::new("Day 6", day6::day6),
+        // Day::new("Day 7", day7::day7),
+        // Day::new("Day 8", day8::day8),
+        // Day::new("Day 9", day9::day9),
+        // Day::new("Day 10", day10::day10),
+        // Day::new("Day 11", day11::day11),
+        // Day::new("Day 12", day12::day12),
+        // Day::new("Day 13", day13::day13),
+        // Day::new("Day 14", day14::day14),
+        // Day::new("Day 15", day15::day15),
+        // Day::new("Day 16", day16::day16),
+        // Day::new("Day 17", day17::day17),
+        // Day::new("Day 18", day18::day18),
+        //Day::new("Day 19", day19::day19),
+        // Day::new("Day 20", day20::day20),
+        // Day::new("Day 21", day21::day21),
+        // Day::new("Day 22", day22::day22),
+        // Day::new("Day 23", day23::day23),
+        // Day::new("Day 24", day24::day24),
+        // Day::new("Day 25", day25::day25),
+    ];
+    for day in days.iter() {
+        day.run();
     }
-
-
-    dbg!(score);
-    let duration = start.elapsed();
-    println!("Time elapsed in expensive_function() is: {:?}", duration);
-}
-
-fn exo1(){
-    let start = Instant::now();
-    let mut score = 0;
-    let reader = BufReader::new(File::open("../data/day4.txt").expect("Cannot open file.txt"));
-
-
-
-    for line in reader.lines(){  
-        let line = line.unwrap();
-        let data = line.split(",").collect::<Vec<&str>>();
-        let elf1 = data[0].split("-").map(|x| x.parse::<u16>().unwrap()).collect::<Vec<u16>>();
-        let elf2 = data[1].split("-").map(|x| x.parse::<u16>().unwrap()).collect::<Vec<u16>>();
- 
-        if elf1[0] <= elf2[0] && elf1[1] >= elf2[1] || elf2[0] <= elf1[0] && elf2[1] >= elf1[1] {
-            score += 1;
-        }
-
-    }
-
-
-    dbg!(score);
-    let duration = start.elapsed();
-    println!("Time elapsed in expensive_function() is: {:?}", duration);
 }

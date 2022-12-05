@@ -1,16 +1,12 @@
-// use std::fs::File;
-// use std::io::{self, BufRead};
-// use std::path::Path;
 use std::collections::HashMap;
-use std::time::{Duration, Instant};
-
-
 use std::io::{BufRead, BufReader};
 use std::fs::File;
-fn main(){
-    let start = Instant::now();
+
+use crate::input;
+
+pub fn day2() -> input::Result<()> {
     let mut score : u32 = 0;
-    let reader = BufReader::new(File::open("../data/rpc.txt").expect("Cannot open file.txt"));
+    let reader = BufReader::new(File::open("../data/day2.txt").expect("Cannot open file.txt"));
     let map : HashMap<String, u32> = HashMap::from([
         ("A X".to_string(), 3),
         ("A Y".to_string(), 4),
@@ -26,9 +22,8 @@ fn main(){
 
         score += map.get(&line.unwrap()).unwrap();
     }
-    let duration = start.elapsed();
-    println!("Time elapsed in expensive_function() is: {:?}", duration);
     dbg!(score);
+    Ok(())
 }
 
 fn translate(word: &str ) -> u32{
@@ -40,7 +35,7 @@ fn translate(word: &str ) -> u32{
     }
 }
 
-fn exo1(){
+pub fn exo1(){
     let map : HashMap<String, u32> = HashMap::from([
         ("A X".to_string(), 4),
         ("A Y".to_string(), 8),
