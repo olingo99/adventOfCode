@@ -53,8 +53,6 @@ fn exo1(){
         ("C Z".to_string(), 6),
     ]);
     let mut score : u32 = 0;
-    // let mut enemy : u32 = 0;
-    // let mut player : u32 = 0;
     let reader = BufReader::new(File::open("../data/rpc.txt").expect("Cannot open file.txt"));
 
     for line in reader.lines() {

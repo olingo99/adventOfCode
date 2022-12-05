@@ -21,7 +21,6 @@ fn main() {
 
     let mut id = 0;
     if let Ok(lines) = read_lines("../data/CalorieCounting.txt") {
-        // Consumes the iterator, returns an (Optional) String
         for line in lines {
             if let Ok(ip) = line {
 

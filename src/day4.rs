@@ -7,7 +7,7 @@ use std::fs::File;
 fn main(){
     let start = Instant::now();
     let mut score = 0;
-    let reader = BufReader::new(File::open("../data/day5.txt").expect("Cannot open file.txt"));
+    let reader = BufReader::new(File::open("../data/day4.txt").expect("Cannot open file.txt"));
 
 
 
