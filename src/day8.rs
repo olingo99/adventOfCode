@@ -29,20 +29,23 @@ pub fn day8() -> input::Result<()> {
                 if i == 3 && j==2{
                     dbg!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 }
-                //dbg!(&temp_array);
                 
+                if temp_array.len() == 0{
+                    temp *= 0;
+                    continue;
+                }
                 for (a,elem) in temp_array.iter().enumerate(){
 
-                    //dbg!(a,elem);
 
                     if *elem>=array[i as usize][j as usize] || a==temp_array.len()-1{
                         //dbg!(a);
                         temp *= a as u32+1;
                         break;
                     }
+
                 }
             }
-            dbg!(temp);
+            //dbg!(temp);
             views.push(temp);
         }
     }
