@@ -8,12 +8,23 @@ pub fn day8() -> input::Result<()> {
     for line in contents.lines(){
         dbg!(line);
         array.push(line.chars().map(|x| x.to_digit(10).unwrap() as u16).collect::<Vec<u16>>());
-        for i in 0..line.len(){
-            if !is_sorted(line[0..i].chars().collect::<Vec<char>>().as_slice()){
-                bool_array.push(vec![true;i]);
-                break;
+        let chars = line.chars().collect::<Vec<char>>();
+        let p_char = chars[0];
+        for k in 1..chars.len()+1{
+            for (i,window) in line.chars().collect::<Vec<char>>().windows(k).enumerate() {
+
             }
         }
+
+        // for i in 1..chars.len(){
+        //     //if chars[i].to_digit(10).unwrap()<p_char.to_digit(10).unwrap(){
+        //     if{
+        //         bool_array.push(vec![true;i]);
+        //         let x = bool_array.len()-1;
+        //         bool_array[x].append(& mut vec![false;chars.len()-i]);
+        //         break;
+        //     }
+        // }
     }
     dbg!(array);
     dbg!(bool_array);
