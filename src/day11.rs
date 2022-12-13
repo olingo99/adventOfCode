@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use regex::RegexSet;
 struct Monkey{
     counted : u32,
-    items: Vec<u32>,
+    items: Vec<u64>,
     operation: String,
     condition: u32,
     r_true: u16,
@@ -11,7 +11,7 @@ struct Monkey{
 }
 
 impl Monkey {
-    fn new( items: Vec<u32>, operation: String, condition: u32, r_true: u16, r_false : u16) -> Monkey{
+    fn new( items: Vec<u64>, operation: String, condition: u32, r_true: u16, r_false : u16) -> Monkey{
         Monkey {
             counted : 0,
             items,
@@ -21,7 +21,7 @@ impl Monkey {
             r_false,
         }
     }
-    fn operation(&mut self){
+    fn operation(&mut self, supermodulo:& u64){
         let data = self.operation.split_whitespace().collect::<Vec<&str>>();
 
         let set = RegexSet::new(&[
@@ -37,16 +37,19 @@ impl Monkey {
             match res[0]{
                 0 => {
                     let num = data[2].parse::<u32>().unwrap();
-                    self.items[i] = ((self.items[i] * num) as f64/3 as f64).floor() as u32;
+                    //self.items[i] = ((self.items[i] * num) as f64/3 as f64).floor() as u32;
+                    self.items[i] = (self.items[i] * num as u64)%*supermodulo;
                     //dbg!(&self.items);
                 },
                 1 => {
-                    self.items[i] = ((self.items[i].pow(2)) as f64/3 as f64).floor() as u32;
+                    //self.items[i] = ((self.items[i].pow(2)) as f64/3 as f64).floor() as u32;
+                    self.items[i] = (self.items[i].pow(2))%*supermodulo;
                     //dbg!(&self.items);
                 },
                 2 => {
                     let num = data[2].parse::<u32>().unwrap();
-                    self.items[i] = ((self.items[i] + num) as f64/3 as f64).floor() as u32;
+                    // self.items[i] = ((self.items[i] + num) as f64/3 as f64).floor() as u32;
+                    self.items[i] = (self.items[i] + num as u64)%*supermodulo;
                     //dbg!(&self.items);
                 },
                 _ => {
@@ -82,7 +85,7 @@ fn condition_check(id:usize, monkeys: &mut Vec<Monkey>){
     let r_true = monkeys[id].r_true;
     let r_false = monkeys[id].r_false;
     for item in monkeys[id].items.clone(){
-        if item%monkeys[id].condition == 0{
+        if item%monkeys[id].condition as u64 == 0{
             monkeys[r_true as usize].items.push(item);
         }
         else{
@@ -101,7 +104,7 @@ pub fn day11() -> input::Result<()> {
         let split = lines[1].split(":").collect::<Vec<&str>>().last().unwrap().split(",").collect::<Vec<&str>>();
         let mut temp = vec![];
         for elem in split{
-            temp.push(elem.trim().parse::<u32>().unwrap());
+            temp.push(elem.trim().parse::<u64>().unwrap());
         }
         let mut monk = Monkey{
             counted: 0,
@@ -113,20 +116,24 @@ pub fn day11() -> input::Result<()> {
         };
         monkeys.push(monk);
     }
+    let mut supermodulo: u64 = 1;
+    for j in 0..monkeys.len(){
+        supermodulo *= monkeys[j].condition as u64;
+    }
 
-    for _i in 0..20{
+    for _i in 0..10000{
         for j in 0..monkeys.len(){
             if monkeys[j].items.len() > 0{
-                monkeys[j].operation();
+                monkeys[j].operation(&supermodulo);
                 condition_check(j, &mut monkeys);
-                dbg!(&monkeys[j].items);
+                //dbg!(&monkeys[j].items);
             }
         }
     }
 
     let mut res = Vec::new();
     for j in 0..monkeys.len(){
-        dbg!(&monkeys[j].items);
+        //dbg!(&monkeys[j].items);
         res.push(monkeys[j].counted);
     }
     
