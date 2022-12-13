@@ -7,7 +7,8 @@
 //mod day7;
 //mod day8;
 //mod day9;
-mod day10;
+//mod day10;
+mod day11;
 
 mod input;
 
@@ -24,8 +25,8 @@ fn main() {
         //Day::new("Day 7", day7::day7),
         //Day::new("Day 8", day8::day8),
         //Day::new("Day 9", day9::day9),
-        Day::new("Day 10", day10::day10),
-        // Day::new("Day 11", day11::day11),
+        //Day::new("Day 10", day10::day10),
+        Day::new("Day 11", day11::day11),
         // Day::new("Day 12", day12::day12),
         // Day::new("Day 13", day13::day13),
         // Day::new("Day 14", day14::day14),
