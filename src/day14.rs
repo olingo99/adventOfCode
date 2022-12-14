@@ -7,6 +7,7 @@ pub fn day14() -> input::Result<()> {
     let mut map : Vec<Vec<char>> = vec![];
     for line in contents.lines(){
         let data = line.split(" -> ").collect::<Vec<&str>>();
+        dbg!("ee");
         dbg!(data);
     }
     Ok(())
