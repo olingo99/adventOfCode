@@ -1,10 +1,12 @@
 use crate::input;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 pub fn day15() -> input::Result<()> {
+    let target_line = 10;
+
     let contents = input::load_day_file("day15.txt");
     let mut map :HashMap<(i32,i32), char> = HashMap::new();
-    let mut max_manhatan : HashMap<(i32,i32), u32> = HashMap::new();
+    let mut max_manhatan : HashMap<(i32,i32), i32> = HashMap::new();
     for line in contents.lines(){
         let data = line.split(":").collect::<Vec<&str>>();
         let sensor_data = data[0].split("=").collect::<Vec<&str>>();
@@ -16,8 +18,17 @@ pub fn day15() -> input::Result<()> {
         dbg!(beacon);
         map.insert(sensor, 'S');
         map.insert(beacon, 'B');
-        //max_manhatan.insert(sensor, )
+
+        max_manhatan.insert(sensor, manhattan_distance(sensor, beacon));
     }
-    dbg!(&map);
+    let set : HashSet<(i32,i32)>  = HashSet::new();
+    for 
+    dbg!(&max_manhatan);
     Ok(())
 }
+
+fn manhattan_distance(a: (i32,i32), b: (i32,i32)) -> i32{
+    (a.0-b.0).abs()+(a.1-b.1).abs()
+}
+
+//manhattan distance
